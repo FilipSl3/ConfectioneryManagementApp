@@ -1,0 +1,47 @@
+@model IEnumerable<ConfectioneryManagementApp.Models.ViewModels.CakeOrderViewModel>
+
+@{
+    ViewData["Title"] = "Torty";
+}
+
+<h2>Zamówione torty</h2>
+
+<form method="get" class="mb3">
+    <div style="display: flex; gap: 1rem; align-items: flex-end;">
+        <div>
+            <label for="startDate">Data od:</label><br />
+            <input type="date" id="startDate" name="startDate" class="form-control" />
+        </div>
+        <div>
+            <label for="endDate">Data do:</label><br />
+            <input type="date" id="endDate" name="endDate" class="form-control" />
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary">Filtruj</button>
+        </div>
+    </div>
+</form>
+
+<table class="table table-striped table-bordered mt-3">
+    <thead>
+    <tr>
+        <th>Smak</th>
+        <th>Rozmiar</th>
+        <th>Data realizacji</th>
+        <th>Klient</th>
+        <th>Dekoracja</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var cake in Model.OrderBy(c => c.Flavor))
+    {
+        <tr>
+            <td>@cake.Flavor</td>
+            <td>@cake.Size</td>
+            <td>@cake.DeliveryDate.ToShortDateString()</td>
+            <td>@cake.ClientName</td>
+            <td>@cake.DecorationDescription</td>
+        </tr>
+    }
+    </tbody>
+</table>

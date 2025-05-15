@@ -1,0 +1,41 @@
+@model IEnumerable<ConfectioneryManagementApp.Models.ViewModels.CakeSummaryViewModel>
+
+@{
+    ViewData["Title"] = "Zestawienie ciast";
+}
+
+<h2>Zamówione ciasta</h2>
+
+<form method="get" class="mb-4">
+    <div style="display: flex; gap: 1rem; align-items: flex-end;">
+        <div>
+            <label for="startDate">Data od:</label><br />
+            <input type="date" id="startDate" name="startDate" class="form-control" />
+        </div>
+        <div>
+            <label for="endDate">Data do:</label><br />
+            <input type="date" id="endDate" name="endDate" class="form-control" />
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary">Filtruj</button>
+        </div>
+    </div>
+</form>
+
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>Nazwa ciasta</th>
+        <th>Łączna liczba sztuk</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var cake in Model)
+    {
+        <tr>
+            <td>@cake.Name</td>
+            <td>@cake.TotalQuantity</td>
+        </tr>
+    }
+    </tbody>
+</table>
