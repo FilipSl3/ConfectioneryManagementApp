@@ -1,0 +1,34 @@
+# Build results
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider / JetBrains
+.idea/
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.bak
+
+# Runtime files
+*.db
+*.db-shm
+*.db-wal
+
+# ASP.NET Secrets
+secrets.json
+
+# Other
+*.DS_Store
+Thumbs.db
