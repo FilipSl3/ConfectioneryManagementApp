@@ -5,20 +5,19 @@ using ConfectioneryManagementApp.Models.ViewModels;
 
 namespace ConfectioneryManagementApp.Controllers
 {
-    public class CakesController : Controller
+    public class PastriesController : Controller
     {
         private readonly AppDbContext _context;
 
-        public CakesController(AppDbContext context)
+        public PastriesController(AppDbContext context)
         {
             _context = context;
         }
 
-        // GET: /Cakes?from=2025-05-01&to=2025-05-15
         public async Task<IActionResult> Index(DateTime? from, DateTime? to)
         {
             var query = _context.Orders
-                .Include(o => o.OrderedCakes)
+                .Include(o => o.Cakes) // to są "PastryEntity"
                 .AsQueryable();
 
             if (from.HasValue)
@@ -28,14 +27,13 @@ namespace ConfectioneryManagementApp.Controllers
                 query = query.Where(o => o.DeliveryDate <= to.Value);
 
             var result = await query
-                .SelectMany(o => o.OrderedCakes.Select(c => new CakesViewModel
+                .SelectMany(o => o.Cakes)
+                .GroupBy(p => p.Name)
+                .Select(g => new PastrySummaryViewModel
                 {
-                    Flavor = c.Flavor,
-                    Size = c.Size,
-                    DeliveryDate = o.DeliveryDate,
-                    ClientName = o.ClientName,
-                    DecorationDescription = o.DecorationDescription
-                }))
+                    Name = g.Key,
+                    Quantity = g.Count()
+                })
                 .ToListAsync();
 
             return View(result);

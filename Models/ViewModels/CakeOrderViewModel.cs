@@ -1,6 +1,6 @@
 namespace ConfectioneryManagementApp.Models.ViewModels;
 
-public class CakeOrderViewModel
+public class CakesViewModel
 {
     public string Flavor { get; set; }
     public string Size { get; set; }

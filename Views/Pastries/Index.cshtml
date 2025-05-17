@@ -1,10 +1,10 @@
-@model IEnumerable<ConfectioneryManagementApp.Models.ViewModels.CakeOrderViewModel>
+@model IEnumerable<ConfectioneryManagementApp.Models.ViewModels.PastrySummaryViewModel>
 
 @{
-    ViewData["Title"] = "Torty";
+    ViewData["Title"] = "Zamówione ciasta";
 }
 
-<h2>Zamówione torty</h2>
+<h2>Zamówione ciasta</h2>
 
 <form method="get" class="mb3">
     <div style="display: flex; gap: 1rem; align-items: flex-end;">
@@ -25,22 +25,16 @@
 <table class="table table-striped table-bordered mt-3">
     <thead>
     <tr>
-        <th>Smak</th>
-        <th>Rozmiar</th>
-        <th>Data realizacji</th>
-        <th>Klient</th>
-        <th>Dekoracja</th>
+        <th>Nazwa</th>
+        <th>Ilość</th>
     </tr>
     </thead>
     <tbody>
-    @foreach (var cake in Model.OrderBy(c => c.Flavor))
+    @foreach (var item in Model)
     {
         <tr>
-            <td>@cake.Flavor</td>
-            <td>@cake.Size</td>
-            <td>@cake.DeliveryDate.ToShortDateString()</td>
-            <td>@cake.ClientName</td>
-            <td>@cake.DecorationDescription</td>
+            <td>@item.Name</td>
+            <td>@item.Quantity</td>
         </tr>
     }
     </tbody>

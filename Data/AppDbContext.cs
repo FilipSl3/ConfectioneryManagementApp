@@ -8,12 +8,21 @@ namespace ConfectioneryManagementApp.Data
     {
         public AppDbContext(DbContextOptions options) : base(options) {}
         
-        public DbSet<OrderEntity> Orders { get; set; }
+        public DbSet<IngredientEntity> Ingredients { get; set; }
+        public DbSet<PastryEntity> Pastries { get; set; }
         public DbSet<CakeEntity> Cakes { get; set; }
+        public DbSet<OrderEntity> Orders { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<CakeIngredientEntity>()
+                .HasKey(ci => new { ci.CakeId, ci.IngredientId });
+
+            modelBuilder.Entity<PastryIngredientEntity>()
+                .HasKey(pi => new { pi.PastryId, pi.IngredientId });
         }
     }
 }

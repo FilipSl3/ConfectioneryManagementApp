@@ -1,9 +1,10 @@
 namespace ConfectioneryManagementApp.Models.Entities;
 
-public class CakeEntity
+public class IngredientEntity
 {
     public int Id { get; set; }
-    public string Flavor { get; set; } = string.Empty;
-    public string Size { get; set; } = string.Empty;
+    public string Name { get; set; } = string.Empty;
+
+    public ICollection<PastryIngredientEntity> PastryIngredients { get; set; } = new List<PastryIngredientEntity>();
     public ICollection<CakeIngredientEntity> CakeIngredients { get; set; } = new List<CakeIngredientEntity>();
 }

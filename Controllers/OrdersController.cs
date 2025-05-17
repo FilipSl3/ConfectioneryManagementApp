@@ -1,33 +1,35 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using ConfectioneryManagementApp.Data;
+using ConfectioneryManagementApp.Models.Entities;
 using ConfectioneryManagementApp.Models.ViewModels;
 
 namespace ConfectioneryManagementApp.Controllers;
 
 public class OrdersController : Controller
 {
-    public IActionResult Index()
+    private readonly AppDbContext _context;
+
+    public OrdersController(AppDbContext context)
     {
-        var orders = new List<OrderViewModel>
-        {
-            new()
+        _context = context;
+    }
+
+    public async Task<IActionResult> Index()
+    {
+        var orders = await _context.Orders
+            .Include(o => o.Cakes)
+            .Include(o => o.OrderedCakes)
+            .Select(o => new OrderViewModel
             {
-                Id = 1,
-                ClientName = "Jan",
-                PhoneNumber = "123456789",
-                DeliveryDate = DateTime.Today,
-                OrderItems = "Rogal x 5",
-                TotalAmount = 2137
-            },
-            new()
-            {
-                Id = 2,
-                ClientName = "Anna",
-                PhoneNumber = "987654321",
-                DeliveryDate = DateTime.Today.AddDays(1),
-                OrderItems = "Sernik x 2",
-                TotalAmount = 7312
-            }
-        };
+                ClientName = o.ClientName,
+                PhoneNumber = o.PhoneNumber,
+                DeliveryDate = o.DeliveryDate,
+                IsCompleted = o.IsCompleted,
+                Pastries = o.Cakes.Select(c => c.Name).ToList(),
+                Cakes = o.OrderedCakes.Select(c => $"{c.Flavor} {c.Size}").ToList()
+            })
+            .ToListAsync();
 
         return View(orders);
     }

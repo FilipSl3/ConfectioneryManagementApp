@@ -1,7 +1,7 @@
 namespace ConfectioneryManagementApp.Models.ViewModels;
 
-public class CakeSummaryViewModel
+public class PastrySummaryViewModel
 {
     public string Name { get; set; }
-    public int TotalQuantity { get; set; }
+    public int Quantity { get; set; }
 }
