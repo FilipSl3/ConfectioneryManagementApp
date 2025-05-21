@@ -1,0 +1,35 @@
+@model ConfectioneryManagementApp.Models.ViewModels.CreateOrderViewModel
+
+<form asp-action="Create" method="post" id="createOrderForm">
+    <div class="form-group">
+        <label>Imię i nazwisko</label>
+        <input asp-for="ClientName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Telefon</label>
+        <input asp-for="PhoneNumber" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Data odbioru</label>
+        <input asp-for="DeliveryDate" class="form-control" type="date" />
+    </div>
+    <div class="form-group">
+        <label>Opis dekoracji</label>
+        <textarea asp-for="DecorationDescription" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+        <label>Ciasta</label><br />
+        @foreach (var p in ViewBag.Pastries)
+        {
+            <label><input type="checkbox" name="SelectedPastryIds" value="@p.Id" /> @p.Name</label><br />
+        }
+    </div>
+    <div class="form-group">
+        <label>Torty</label><br />
+        @foreach (var c in ViewBag.Cakes)
+        {
+            <label><input type="checkbox" name="SelectedCakeIds" value="@c.Id" /> @c.Flavor @c.Size</label><br />
+        }
+    </div>
+    <button type="submit" class="btn btn-primary">Zapisz</button>
+</form>

@@ -1,0 +1,17 @@
+@* Widok częściowy: wspólny filtr dat *@
+
+<form method="get" class="mb-3">
+    <div style="display: flex; gap: 1rem; align-items: flex-end;">
+        <div>
+            <label for="from">Data od:</label>
+            <input type="date" id="from" name="from" value="@Context.Request.Query["from"]" class="form-control" />
+        </div>
+        <div>
+            <label for="to">Data do:</label>
+            <input type="date" id="to" name="to" value="@Context.Request.Query["to"]" class="form-control" />
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary">Filtruj</button>
+        </div>
+    </div>
+</form>

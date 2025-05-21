@@ -22,10 +22,16 @@ public class IngredientsController : Controller
             .AsQueryable();
 
         if (from.HasValue)
-            query = query.Where(o => o.DeliveryDate >= from.Value);
+        {
+            var fromUtc = DateTime.SpecifyKind(from.Value, DateTimeKind.Utc);
+            query = query.Where(o => o.DeliveryDate >= fromUtc);
+        }
 
         if (to.HasValue)
-            query = query.Where(o => o.DeliveryDate <= to.Value);
+        {
+            var toUtc = DateTime.SpecifyKind(to.Value, DateTimeKind.Utc);
+            query = query.Where(o => o.DeliveryDate <= toUtc);
+        }
 
         var orders = await query.ToListAsync();
 

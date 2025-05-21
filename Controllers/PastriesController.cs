@@ -17,14 +17,21 @@ namespace ConfectioneryManagementApp.Controllers
         public async Task<IActionResult> Index(DateTime? from, DateTime? to)
         {
             var query = _context.Orders
-                .Include(o => o.Cakes) // to są "PastryEntity"
+                .Include(o => o.Cakes)
                 .AsQueryable();
 
             if (from.HasValue)
-                query = query.Where(o => o.DeliveryDate >= from.Value);
+            {
+                var fromUtc = DateTime.SpecifyKind(from.Value, DateTimeKind.Utc);
+                query = query.Where(o => o.DeliveryDate >= fromUtc);
+            }
 
             if (to.HasValue)
-                query = query.Where(o => o.DeliveryDate <= to.Value);
+            {
+                var toUtc = DateTime.SpecifyKind(to.Value, DateTimeKind.Utc);
+                query = query.Where(o => o.DeliveryDate <= toUtc);
+            }
+
 
             var result = await query
                 .SelectMany(o => o.Cakes)
