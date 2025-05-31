@@ -4,24 +4,28 @@
     ViewData["Title"] = "Zamówione ciasta";
 }
 
-<h2>Zamówione ciasta</h2>
+<div class="orders-form">
 
-@await Html.PartialAsync("_DateFilterPartial")
+    <h2>Zamówione ciasta</h2>
 
-<table class="table table-striped table-bordered mt-3">
-    <thead>
-    <tr>
-        <th>Nazwa</th>
-        <th>Ilość</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var item in Model)
-    {
+    @await Html.PartialAsync("_DateFilterPartial")
+
+    <table class="table table-striped table-bordered mt-3">
+        <thead>
         <tr>
-            <td>@item.Name</td>
-            <td>@item.Quantity</td>
+            <th>Nazwa</th>
+            <th>Ilość</th>
         </tr>
-    }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Quantity</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+</div>

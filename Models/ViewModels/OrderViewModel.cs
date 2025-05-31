@@ -1,7 +1,10 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace ConfectioneryManagementApp.Models.ViewModels;
 
 public class OrderViewModel
 {
+    public int Id { get; set; }
     public string ClientName { get; set; }
     public string PhoneNumber { get; set; }
     public DateTime DeliveryDate { get; set; }

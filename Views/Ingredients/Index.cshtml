@@ -4,24 +4,28 @@
     ViewData["Title"] = "Lista zakupowa";
 }
 
-<h2>Lista zakupowa</h2>
+<div class="orders-form">
 
-@await Html.PartialAsync("_DateFilterPartial")
+    <h2>Lista zakupowa</h2>
 
-<table class="table table-striped table-bordered mt-3">
-    <thead>
-    <tr>
-        <th>Składnik</th>
-        <th>Łączna ilość (g)</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var item in Model)
-    {
+    @await Html.PartialAsync("_DateFilterPartial")
+
+    <table class="table table-striped table-bordered mt-3">
+        <thead>
         <tr>
-            <td>@item.Name</td>
-            <td>@item.TotalQuantity</td>
+            <th>Składnik</th>
+            <th>Łączna ilość (g)</th>
         </tr>
-    }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.TotalQuantity</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+</div>

@@ -3,20 +3,18 @@
 @using ConfectioneryManagementApp.Models.Entities
 
 @{
-    ViewData["Title"] = "Edycja zamówienia";
+    ViewData["Title"] = "Nowe zamówienie";
     var pastries = ViewBag.Pastries as List<PastryEntity> ?? new List<PastryEntity>();
     var cakes = ViewBag.Cakes as List<CakeEntity> ?? new List<CakeEntity>();
 }
 
 <div class="orders-form">
 
-    <h2>Edycja zamówienia</h2>
+    <h2>Nowe zamówienie</h2>
 
-    <form asp-action="Edit" method="post" class="orders-form">
+    <form asp-action="Create" method="post">
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-
-        <input type="hidden" asp-for="Id" />
 
         <div class="form-label mb-3">
             <label>Imię i nazwisko</label>
@@ -43,14 +41,14 @@
                 <label><b>Ciasta</b></label><br />
                 @foreach (var p in ViewBag.Pastries)
                 {
-                    <label><input type="checkbox" name="SelectedPastryIds" value="@p.Id" @(Model.SelectedPastryIds.Contains(p.Id) ? "checked" : "") /> @p.Name</label><br />
+                    <label><input type="checkbox" name="SelectedPastryIds" value="@p.Id" /> @p.Name</label><br />
                 }
             </div>
             <div class="form-label mb-3">
                 <label><b>Torty</b></label><br />
                 @foreach (var c in ViewBag.Cakes)
                 {
-                    <label><input type="checkbox" name="SelectedCakeIds" value="@c.Id" @(Model.SelectedCakeIds.Contains(c.Id) ? "checked" : "") /> @c.Flavor @c.Size</label><br />
+                    <label><input type="checkbox" name="SelectedCakeIds" value="@c.Id" /> @c.Flavor @c.Size</label><br />
                 }
             </div>
         </div>

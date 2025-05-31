@@ -2,7 +2,8 @@
 @{
     Layout = null;
 }
-<form asp-action="Create" method="post" id="orderModalForm">
+<form asp-action="Edit" method="post" id="orderModalForm">
+    <input type="hidden" asp-for="Id" />
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(false, "", new { @class = "text-danger" })
 
@@ -31,16 +32,16 @@
             <label><b>Ciasta</b></label><br />
             @foreach (var p in ViewBag.Pastries)
             {
-                <label><input type="checkbox" name="SelectedPastryIds" value="@p.Id" /> @p.Name</label><br />
+                <label><input type="checkbox" name="SelectedPastryIds" value="@p.Id" @(Model.SelectedPastryIds.Contains(p.Id) ? "checked" : "") /> @p.Name</label><br />
             }
         </div>
         <div class="form-label mb-3">
             <label><b>Torty</b></label><br />
             @foreach (var c in ViewBag.Cakes)
             {
-                <label><input type="checkbox" name="SelectedCakeIds" value="@c.Id" /> @c.Flavor @c.Size</label><br />
+                <label><input type="checkbox" name="SelectedCakeIds" value="@c.Id" @(Model.SelectedCakeIds.Contains(c.Id) ? "checked" : "") /> @c.Flavor @c.Size</label><br />
             }
         </div>
     </div>
-    <button type="submit" class="btn btn-primary">Zapisz</button>
+    <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
 </form>

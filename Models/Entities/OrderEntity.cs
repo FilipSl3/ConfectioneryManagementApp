@@ -16,8 +16,8 @@ public class OrderEntity
 
     public bool IsCompleted { get; set; }
 
-    public ICollection<PastryEntity> Cakes { get; set; }
+    public List<PastryEntity> Cakes { get; set; } = new();
     public List<CakeEntity> OrderedCakes { get; set; } = new();
-    public string DecorationDescription { get; set; } = string.Empty;
+    public string? DecorationDescription { get; set; }
 
 }

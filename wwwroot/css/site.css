@@ -29,3 +29,39 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+
+/*Filter Bar*/
+.all-filter-bar{
+  display: flex;
+  width: auto;
+  gap: 1rem;
+}
+
+.filter-bar {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-end;
+  margin-bottom: 1rem;
+}
+
+.filter-bar .form-control {
+  min-width: 160px;
+}
+
+.btn-zamowienie{
+  margin-left: auto;
+  margin-bottom: 2rem;
+}
+
+.individual-form-label{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10rem;
+  margin: auto;
+}
+
+.orders-form{
+  width: 800px;
+  margin: auto;
+}
